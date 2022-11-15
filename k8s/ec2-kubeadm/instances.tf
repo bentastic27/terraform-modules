@@ -14,6 +14,11 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+resource "aws_key_pair" "instance_keypair" {
+  key_name   = "${var.resource_name_prefix}-keypair"
+  public_key = file(var.aws_keypair_public_key)
+}
+
 resource "aws_instance" "kubeadm_master" {
   count = var.master_count
 
@@ -27,7 +32,7 @@ resource "aws_instance" "kubeadm_master" {
     RafayProject = var.rafay_project
   }
 
-  key_name = var.key_name
+  key_name = resource.aws_key_pair.instance_keypair.key_name
 
   subnet_id = aws_subnet.subnet.id
   vpc_security_group_ids = [
@@ -69,7 +74,7 @@ resource "aws_instance" "kubeadm_worker" {
     RafayProject = var.rafay_project
   }
 
-  key_name = var.key_name
+  key_name = resource.aws_key_pair.instance_keypair.key_name
 
   subnet_id = aws_subnet.subnet.id
   vpc_security_group_ids = [

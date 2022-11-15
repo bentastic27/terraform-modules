@@ -5,7 +5,6 @@ variable "install_kubernetes" {
 
 variable "resource_name_prefix" {
   type = string
-  default = "yourname-ec2-kubeadm"
   description = "Prefix of resource names in AWS"
 }
 
@@ -39,27 +38,24 @@ variable "region" {
   default = "us-west-2"
 }
 
-variable "instance_ami_id" {
-  type = string
-  default = "ami-0892d3c7ee96c0bf7" # ubuntu 20.04 in us-west-2
-}
-
 variable "instance_ami_user" {
   type = string
   default = "ubuntu"
 }
 
-variable "instance_keypair_file" {
+variable "aws_keypair_private_key" {
   type = string
+  default = "~/.ssh/id_rsa"
+}
+
+variable "aws_keypair_public_key" {
+  type = string
+  default = "~/.ssh/id_rsa.pub"
 }
 
 variable "instance_type" {
   type = string
   default = "t2.xlarge"
-}
-
-variable "key_name" {
-  type = string
 }
 
 variable "containerd_release_version" {
@@ -93,6 +89,6 @@ variable "worker_count" {
 }
 
 variable "rafay_import" {
-  default = true
+  default = false
   type = bool
 }
