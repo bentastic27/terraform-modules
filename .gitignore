@@ -1,0 +1,16 @@
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.lock.hcl
+*credentials.pem
+*passphrase.txt
+conjurer-linux-amd64.tar.bz2
+/oci-mks-nodes/cluster.yaml
+ec2-k3s-import/import.yaml
+ec2-kubeadm-import/import.yaml
