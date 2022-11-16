@@ -19,6 +19,13 @@ resource "aws_key_pair" "instance_keypair" {
   public_key = file(var.aws_keypair_public_key)
 }
 
+locals {
+  rafay_tags = {
+    RafayClusterName = var.rafay_cluster_name
+    RafayProject = var.rafay_project
+  }
+}
+
 resource "aws_instance" "kubeadm_master" {
   count = var.master_count
 
@@ -26,11 +33,10 @@ resource "aws_instance" "kubeadm_master" {
   instance_type = var.instance_type
   associate_public_ip_address = true
 
-  tags = {
-    Name = "${var.resource_name_prefix}-master-${count.index}"
-    RafayClusterName = var.rafay_cluster_name
-    RafayProject = var.rafay_project
-  }
+  tags = merge(
+    {Name = "${var.resource_name_prefix}-master-${count.index}"},
+    var.rafay_import ? local.rafay_tags : {}
+  )
 
   key_name = resource.aws_key_pair.instance_keypair.key_name
 
@@ -68,11 +74,10 @@ resource "aws_instance" "kubeadm_worker" {
   instance_type = var.instance_type
   associate_public_ip_address = true
 
-  tags = {
-    Name = "${var.resource_name_prefix}-worker-${count.index}"
-    RafayClusterName = var.rafay_cluster_name
-    RafayProject = var.rafay_project
-  }
+  tags = merge(
+    {Name = "${var.resource_name_prefix}-worker-${count.index}"},
+    var.rafay_import ? local.rafay_tags : {}
+  )
 
   key_name = resource.aws_key_pair.instance_keypair.key_name
 
