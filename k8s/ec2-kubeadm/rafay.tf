@@ -7,5 +7,5 @@ resource "rafay_import_cluster" "terraform-importcluster" {
   clustername       = var.rafay_cluster_name
   projectname       = var.rafay_project
   blueprint         = var.rafay_blueprint
-  kubeconfig_path   = "ansible-output/kubeconfig.yaml"
+  kubeconfig_path   = "${path.module}/ansible-output/kubeconfig.yaml"
 }
