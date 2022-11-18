@@ -23,10 +23,9 @@ resource "aws_eks_cluster" "eks_cluster" {
 
   vpc_config {
     subnet_ids = aws_subnet.subnet[*].id
+    endpoint_private_access = ! var.public_access
+    endpoint_public_access = var.public_access
   }
-
-  endpoint_private_access = ! var.public_access
-  endpoint_public_access = var.public_access
 
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,
