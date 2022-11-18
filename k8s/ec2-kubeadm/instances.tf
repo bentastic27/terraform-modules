@@ -94,7 +94,7 @@ resource "aws_instance" "kubeadm_worker" {
   provisioner "local-exec" {
     when = destroy
     command = <<EOT
-      if [ -f ${path.module}/ansible-output/kubeconfig.yaml]
+      if [ -f ${path.module}/ansible-output/kubeconfig.yaml ]
       then
         export KUBECONFIG=${path.module}/ansible-output/kubeconfig.yaml
         kubectl drain ${self.public_ip} --ignore-daemonsets --delete-local-data
