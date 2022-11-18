@@ -17,3 +17,34 @@ variable "eks_version" {
   default = "1.23"
   type = string
 }
+
+variable "instance_types" {
+  default = ["t2.xlarge"]
+  type = list(string)
+}
+
+variable "ami_type" {
+  # https://docs.aws.amazon.com/eks/latest/APIReference/API_Nodegroup.html#AmazonEKS-Type-Nodegroup-amiType
+  default = "AL2_x86_64"
+  type = string
+}
+
+variable "public_access" { # test this one more :-^)
+  default = true
+  type = bool
+}
+
+variable "min_size" {
+  default = 1
+  type = number
+}
+
+variable "max_size" {
+  default = 6
+  type = number
+}
+
+variable "desired_size" {
+  default = 3
+  type = number
+}

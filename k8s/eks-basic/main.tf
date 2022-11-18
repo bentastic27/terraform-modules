@@ -23,22 +23,28 @@ resource "aws_eks_cluster" "eks_cluster" {
     subnet_ids = aws_subnet.subnet[*].id
   }
 
+  endpoint_private_access = ! var.public_access
+  endpoint_public_access = var.public_access
+
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
   ]
 }
 
-resource "aws_eks_node_group" "example" {
+resource "aws_eks_node_group" "ng" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = "${var.resource_name_prefix}-ng"
   node_role_arn   = aws_iam_role.eks_ec2_assume_role.arn
   subnet_ids      = aws_subnet.subnet[*].id
 
+  instance_types = var.instance_types
+  ami_type = var.ami_type
+
   scaling_config {
-    desired_size = 3
-    max_size     = 6
-    min_size     = 1
+    desired_size = var.desired_size
+    max_size     = var.max_size
+    min_size     = var.min_size
   }
 
   update_config {

@@ -27,6 +27,7 @@ resource "aws_subnet" "subnet" {
   cidr_block        = "172.16.${count.index}.0/24"
   availability_zone = data.aws_availability_zones.az_list.names[count.index]
 
+  map_public_ip_on_launch = var.public_access
 
   tags = {
     Name = "${var.resource_name_prefix}-subnet-${count.index}"
