@@ -19,6 +19,8 @@ resource "aws_eks_cluster" "eks_cluster" {
   name     = "${var.resource_name_prefix}-eks-cluster"
   role_arn = aws_iam_role.eks_assume_role.arn
 
+  version = var.eks_version
+
   vpc_config {
     subnet_ids = aws_subnet.subnet[*].id
   }
