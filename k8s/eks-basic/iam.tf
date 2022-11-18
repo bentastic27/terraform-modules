@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
 }
 
 resource "aws_iam_role" "eks_ec2_assume_role" {
-  name = "eks-node-group-example"
+  name = "${var.resource_name_prefix}-ng"
 
   assume_role_policy = jsonencode({
     Statement = [{
