@@ -80,7 +80,7 @@ resource "aws_route_table" "private_subnet_rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.ngw.id
+    nat_gateway_id = aws_nat_gateway.ngw.id
   }
 
   tags = {
