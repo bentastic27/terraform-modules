@@ -48,3 +48,8 @@ variable "desired_size" {
   default = 3
   type = number
 }
+
+variable "disk_size" {
+  default = 50
+  type = number
+}

@@ -43,6 +43,7 @@ resource "aws_eks_node_group" "ng" {
 
   instance_types = var.instance_types
   ami_type = var.ami_type
+  disk_size = var.disk_size
 
   scaling_config {
     desired_size = var.desired_size
