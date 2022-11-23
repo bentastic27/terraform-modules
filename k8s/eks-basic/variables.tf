@@ -53,3 +53,13 @@ variable "disk_size" {
   default = 50
   type = number
 }
+
+variable "aws_ignore_tags_keys" {
+  default = []
+  type = list(string)
+}
+
+variable "aws_ignore_tags_keyprefixes" {
+  default = []
+  type = list(string)
+}

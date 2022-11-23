@@ -13,6 +13,11 @@ provider "aws" {
   profile = "default"
   region  = var.region
   shared_credentials_file = var.aws_credentials_file
+
+  ignore_tags {
+    keys = var.aws_ignore_tags_keys
+    key_prefixes = var.aws_ignore_tags_keyprefixes
+  }
 }
 
 resource "aws_eks_cluster" "eks_cluster" {
