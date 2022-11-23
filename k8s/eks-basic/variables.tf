@@ -29,7 +29,7 @@ variable "ami_type" {
   type = string
 }
 
-variable "public_access" { # test this one more :-^)
+variable "public_access" {
   default = true
   type = bool
 }
