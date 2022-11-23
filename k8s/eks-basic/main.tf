@@ -28,8 +28,11 @@ resource "aws_eks_cluster" "eks_cluster" {
 
   vpc_config {
     subnet_ids = concat(aws_subnet.private_subnet[*].id, aws_subnet.public_subnet[*].id)
-    endpoint_private_access = ! var.public_access
-    endpoint_public_access = var.public_access
+
+    # private access always enabled, no downsides that I can see
+    # https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    endpoint_private_access = true
+    endpoint_public_access = var.eks_public_access
   }
 
   depends_on = [
@@ -44,7 +47,7 @@ resource "aws_eks_node_group" "ng" {
   node_role_arn   = aws_iam_role.eks_ec2_assume_role.arn
 
   # perhaps add another var to specify if the initial ng should be public or not
-  subnet_ids      = var.public_access ? aws_subnet.public_subnet[*].id : aws_subnet.private_subnet[*].id
+  subnet_ids      = var.ng_public_access ? aws_subnet.public_subnet[*].id : aws_subnet.private_subnet[*].id
 
   instance_types = var.instance_types
   ami_type = var.ami_type

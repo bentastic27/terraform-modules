@@ -29,7 +29,12 @@ variable "ami_type" {
   type = string
 }
 
-variable "public_access" {
+variable "eks_public_access" {
+  default = true
+  type = bool
+}
+
+variable "ng_public_access" {
   default = true
   type = bool
 }
