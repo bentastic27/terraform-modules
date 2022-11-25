@@ -26,3 +26,24 @@ variable "cert_manager_chart_set" {
   default = {
   }
 }
+
+variable "install_nginx" {
+  type = bool
+  default = false
+}
+
+variable "nginx_version" {
+  type = string
+  default = "4.0.18"  
+}
+
+variable "nginx_service_type" {
+  type = string
+  default = "LoadBalancer"
+}
+
+variable "nginx_chart_set" {
+  type = map(string)
+  default = {
+  }
+}
