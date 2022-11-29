@@ -15,16 +15,23 @@ variable "kubeconfig_path" {
 
 variable "rancher_chart_set" {
   type = map(string)
-  default = {
-    "hostname" = "rancher.example.com"
-    "bootstrapPassword" = "someStrongPassword"
-  }
+  default = {}
+}
+
+variable "rancher_hostname" {
+  type = string
+  default = "rancher.example.com"
+}
+
+variable "rancher_bootstrap_password" {
+  type = string
+  default = "someStrongPassword"
+  sensitive = true
 }
 
 variable "cert_manager_chart_set" {
   type = map(string)
-  default = {
-  }
+  default = {}
 }
 
 variable "install_nginx" {
@@ -44,6 +51,5 @@ variable "nginx_service_type" {
 
 variable "nginx_chart_set" {
   type = map(string)
-  default = {
-  }
+  default = {}
 }

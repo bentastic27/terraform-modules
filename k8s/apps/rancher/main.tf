@@ -56,7 +56,7 @@ resource "helm_release" "ingress_nginx" {
   }
 
   dynamic "set" {
-    for_each = var.cert_manager_chart_set
+    for_each = var.nginx_chart_set
     content {
       name = set.key
       value = set.value
@@ -84,6 +84,16 @@ resource "helm_release" "rancher" {
       name = "ingress.ingressClassName"
       value = "nginx"
     }
+  }
+
+  set {
+    name = "hostname"
+    value = var.rancher_hostname
+  }
+
+  set {
+    name = "bootstrapPassword"
+    value = var.rancher_bootstrap_password
   }
 
   dynamic "set" {
