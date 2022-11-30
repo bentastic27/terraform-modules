@@ -12,8 +12,19 @@ terraform {
 }
 
 provider "helm" {
+  debug = true
   kubernetes {
     config_path = var.kubeconfig_path
+    host = var.cluster_endpoint
+    cluster_ca_certificate = base64decode(var.cluster_ca_cert)
+    dynamic "exec" {
+      for_each = var.eks_cluster ? toset([1]) : toset([])
+      content {
+        api_version = "client.authentication.k8s.io/v1beta1"
+        args        = ["eks", "get-token", "--cluster-name", var.eks_cluster_name, "--region", var.eks_cluster_region]
+        command     = "aws"
+      }
+    }
   }
 }
 

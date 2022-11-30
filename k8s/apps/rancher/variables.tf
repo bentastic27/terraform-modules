@@ -10,7 +10,37 @@ variable "cert_manager_version" {
 
 variable "kubeconfig_path" {
   type = string
-  default = "~/.kube/config"
+  default = null
+  nullable = true
+}
+
+variable "eks_cluster" {
+  type = bool
+  default = false
+}
+
+variable "eks_cluster_name" {
+  type = string
+  nullable = true  
+  default = null
+}
+
+variable "eks_cluster_region" {
+  type = string
+  nullable = true  
+  default = null
+}
+
+variable "cluster_endpoint" {
+  type = string
+  nullable = true  
+  default = null
+}
+
+variable "cluster_ca_cert" {
+  type = string
+  nullable = true  
+  default = null
 }
 
 variable "rancher_chart_set" {
