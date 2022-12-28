@@ -43,9 +43,9 @@ module "something" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
-| <a name="provider_local"></a> [local](#provider\_local) | 2.2.3 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.27 |
+| <a name="provider_local"></a> [local](#provider\_local) | n/a |
+| <a name="provider_null"></a> [null](#provider\_null) | n/a |
 | <a name="provider_rafay"></a> [rafay](#provider\_rafay) | 1.1.0 |
 
 ## Modules
