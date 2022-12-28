@@ -12,7 +12,7 @@ terraform {
 provider "aws" {
   profile = "default"
   region  = var.region
-  shared_credentials_file = var.aws_credentials_file
+  shared_credentials_files = [var.aws_credentials_file]
 
   ignore_tags {
     keys = var.aws_ignore_tags_keys
