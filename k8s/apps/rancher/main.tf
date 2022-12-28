@@ -28,6 +28,20 @@ provider "helm" {
   }
 }
 
+provider "kubernetes" {
+    config_path = var.kubeconfig_path
+    host = var.cluster_endpoint
+    cluster_ca_certificate = base64decode(var.cluster_ca_cert)
+    dynamic "exec" {
+      for_each = var.eks_cluster ? toset([1]) : toset([])
+      content {
+        api_version = "client.authentication.k8s.io/v1beta1"
+        args        = ["eks", "get-token", "--cluster-name", var.eks_cluster_name, "--region", var.eks_cluster_region]
+        command     = "aws"
+      }
+    }
+}
+
 resource "helm_release" "cert_manager" {
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
@@ -113,5 +127,12 @@ resource "helm_release" "rancher" {
       name = set.key
       value = set.value
     }
+  }
+}
+
+data "kubernetes_ingress_v1" "rancher_address" {
+  metadata {
+    name = "rancher"
+    namespace = "cattle-system"
   }
 }
