@@ -52,7 +52,7 @@ resource "helm_release" "cert_manager" {
 }
 
 resource "helm_release" "ingress_nginx" {
-  count = var.install_nginx ? 1 : 0
+  count = var.install_nginx || var.eks_cluster ? 1 : 0 # required for eks clusters
   name       = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
@@ -90,7 +90,7 @@ resource "helm_release" "rancher" {
 
   dynamic "set" {
     # hacky conditional dynamic block
-    for_each = var.install_nginx ? toset([1]) : toset([])
+    for_each = var.install_nginx || var.eks_cluster ? toset([1]) : toset([])
     content {
       name = "ingress.ingressClassName"
       value = "nginx"
