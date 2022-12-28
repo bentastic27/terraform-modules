@@ -68,3 +68,13 @@ variable "aws_ignore_tags_keyprefixes" {
   default = []
   type = list(string)
 }
+
+variable "enable_ebs_addon" {
+  default = true
+  type = bool
+}
+
+variable "ebs_addon_version" {
+  default = "latest"
+  type = string  
+}

@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "~> 4.0"
     }
   }
 
@@ -68,4 +68,17 @@ resource "aws_eks_node_group" "ng" {
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
+}
+
+data "aws_eks_addon_version" "latest_ebs_addon_version" {
+  addon_name         = "aws-ebs-csi-driver"
+  kubernetes_version = aws_eks_cluster.eks_cluster.version
+  most_recent        = true
+}
+
+resource "aws_eks_addon" "ebs_addon" {
+  count = var.enable_ebs_addon ? 1 : 0
+  cluster_name = aws_eks_cluster.eks_cluster.name
+  addon_name = "aws-ebs-csi-driver"
+  addon_version = var.ebs_addon_version == "latest" ? data.aws_eks_addon_version.latest_ebs_addon_version.version : var.ebs_addon_version
 }
