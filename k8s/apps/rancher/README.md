@@ -12,6 +12,7 @@
 |------|---------|
 | <a name="provider_helm"></a> [helm](#provider\_helm) | ~> 2.7 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.16 |
+| <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Modules
 
@@ -24,6 +25,7 @@ No modules.
 | [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [helm_release.ingress_nginx](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [helm_release.rancher](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [time_sleep.wait_for_rancher_ingress](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [kubernetes_ingress_v1.rancher_address](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/ingress_v1) | data source |
 
 ## Inputs
