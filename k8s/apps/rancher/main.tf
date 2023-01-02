@@ -130,10 +130,13 @@ resource "helm_release" "rancher" {
   }
 }
 
+resource "time_sleep" "wait_for_rancher_ingress" {
+  depends_on = [helm_release.rancher]
+  create_duration = "1m"
+}
+
 data "kubernetes_ingress_v1" "rancher_address" {
-  depends_on = [
-    helm_release.rancher
-  ]
+  depends_on = [time_sleep.wait_for_rancher_ingress]
   metadata {
     name = "rancher"
     namespace = "cattle-system"
