@@ -131,6 +131,9 @@ resource "helm_release" "rancher" {
 }
 
 data "kubernetes_ingress_v1" "rancher_address" {
+  depends_on = [
+    helm_release.rancher
+  ]
   metadata {
     name = "rancher"
     namespace = "cattle-system"
