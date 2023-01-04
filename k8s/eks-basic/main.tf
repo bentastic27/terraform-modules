@@ -9,17 +9,6 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
-provider "aws" {
-  profile = "default"
-  region  = var.region
-  shared_credentials_files = [var.aws_credentials_file]
-
-  ignore_tags {
-    keys = var.aws_ignore_tags_keys
-    key_prefixes = var.aws_ignore_tags_keyprefixes
-  }
-}
-
 resource "aws_eks_cluster" "eks_cluster" {
   name     = "${var.resource_name_prefix}-eks-cluster"
   role_arn = aws_iam_role.eks_assume_role.arn

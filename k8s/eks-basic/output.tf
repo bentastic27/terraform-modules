@@ -1,5 +1,9 @@
-output "cluster-name" {
+output "name" {
   value = aws_eks_cluster.eks_cluster.name
+}
+
+output "region" {
+  value = var.region
 }
 
 output "endpoint" {
