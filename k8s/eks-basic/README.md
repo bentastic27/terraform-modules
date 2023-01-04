@@ -49,9 +49,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ami_type"></a> [ami\_type](#input\_ami\_type) | n/a | `string` | `"AL2_x86_64"` | no |
-| <a name="input_aws_credentials_file"></a> [aws\_credentials\_file](#input\_aws\_credentials\_file) | n/a | `string` | `"~/.aws/credentials"` | no |
-| <a name="input_aws_ignore_tags_keyprefixes"></a> [aws\_ignore\_tags\_keyprefixes](#input\_aws\_ignore\_tags\_keyprefixes) | n/a | `list(string)` | `[]` | no |
-| <a name="input_aws_ignore_tags_keys"></a> [aws\_ignore\_tags\_keys](#input\_aws\_ignore\_tags\_keys) | n/a | `list(string)` | `[]` | no |
 | <a name="input_desired_size"></a> [desired\_size](#input\_desired\_size) | n/a | `number` | `3` | no |
 | <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size) | n/a | `number` | `50` | no |
 | <a name="input_ebs_addon_version"></a> [ebs\_addon\_version](#input\_ebs\_addon\_version) | n/a | `string` | `"latest"` | no |
@@ -69,7 +66,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cluster-name"></a> [cluster-name](#output\_cluster-name) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
 | <a name="output_kubeconfig-certificate-authority-data"></a> [kubeconfig-certificate-authority-data](#output\_kubeconfig-certificate-authority-data) | n/a |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+| <a name="output_region"></a> [region](#output\_region) | n/a |
 <!-- END_TF_DOCS -->
