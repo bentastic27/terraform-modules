@@ -3,11 +3,6 @@ variable "region" {
   type = string
 }
 
-variable "aws_credentials_file" {
-  default = "~/.aws/credentials"
-  type = string
-}
-
 variable "resource_name_prefix" {
   default = "example"
   type = string
@@ -57,16 +52,6 @@ variable "desired_size" {
 variable "disk_size" {
   default = 50
   type = number
-}
-
-variable "aws_ignore_tags_keys" {
-  default = []
-  type = list(string)
-}
-
-variable "aws_ignore_tags_keyprefixes" {
-  default = []
-  type = list(string)
 }
 
 variable "enable_ebs_addon" {

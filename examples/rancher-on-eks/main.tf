@@ -1,3 +1,10 @@
+provider "aws" {
+  shared_credentials_files = ["~/.aws/credentials"]
+
+  ignore_tags {
+    key_prefixes = [ "AutoTag" ]
+  }
+}
 
 variable "resource_name_prefix" {
   default = "example"
@@ -28,12 +35,13 @@ variable "rancher_bootstrap_password" {
 }
 
 module "eks-cluster" {
+  providers = {
+    aws = aws
+   }
+
   source = "../../k8s/eks-basic"
 
   region = var.region
-  aws_credentials_file = var.aws_credentials_file
-  resource_name_prefix = var.resource_name_prefix
-  aws_ignore_tags_keyprefixes = [ "AutoTag" ]
 }
 
 module "rancher" {
@@ -41,7 +49,7 @@ module "rancher" {
 
   eks_cluster = true
   eks_cluster_region = var.region
-  eks_cluster_name = module.eks-cluster.cluster-name
+  eks_cluster_name = module.eks-cluster.name
 
   cluster_endpoint = module.eks-cluster.endpoint
   cluster_ca_cert = module.eks-cluster.kubeconfig-certificate-authority-data
